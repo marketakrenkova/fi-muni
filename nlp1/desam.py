@@ -1,4 +1,4 @@
-import sys, subprocess
+import sys
 
 for line in sys.stdin:
     columns = line.rstrip('\r\n').split("\t")
