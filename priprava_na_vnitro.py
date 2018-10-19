@@ -115,10 +115,10 @@ def e():
 
 def multiples(n):
     " 10 nasobku n"
-    for i in range(1,11):
-        print(n*i, end = "")
-        if i < 10:
-            print(",", end = " ")
+    for i in range(1,10):
+        print(n*i, end = ", ")
+    print(n*10)
+      
 
 def table_modulo(n):
     "table_modulo(n) vypíše tabulku s daným počtem řádků a sloupců, kde v každé buňce se nachází zbytek po dělení čísla sloupce číslem řádku."
