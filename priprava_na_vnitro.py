@@ -118,6 +118,9 @@ def multiples(n):
     for i in range(1,10):
         print(n*i, end = ", ")
     print(n*10)
+    """
+    print(", ".join([str(i*n) for i in range (1, 10)]))
+    """
       
 
 def table_modulo(n):
