@@ -1,6 +1,5 @@
 import math
 
-
 def odd_numbers(n):
     "licha cisla"
     for i in range(n*2):
@@ -37,7 +36,12 @@ def to_binary(number):
             output = "1" + output
         n = n//2
     print(output)
-
+    
+def divisors(n):
+    "print all divisors of number n"
+    for i in range (1, n + 1):
+        if n % i == 0:
+            print(i)
 
 def divisors_count(n):
     "return count of divisors of number n"
