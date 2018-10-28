@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import sys
-import fileinput
 
 
 def mistake_type(tag, new_tags, line, columns):
@@ -36,8 +35,7 @@ def mistake_type(tag, new_tags, line, columns):
     return ("different", None)
 
 
-#for line in sys.stdin:
-for line in fileinput.input():
+for line in sys.stdin:
     columns = line.rstrip('\r\n').split("\t")
     if len(columns) < 4:
         continue
