@@ -1,51 +1,62 @@
 #!/usr/bin/env python3
 
 import sys
+import fileinput
 
 
-def mistake_type(code, new_codes, line, columns):
+def mistake_type(tag, new_tags, line, columns):
     matched = []
 
+    #no tag
+    if tag =="":
+        return("no tag", None)
+    
     #no match
-    if new_codes == []:
+    if new_tags == []:
         return ("no match", None)
 
     #prefix
-    l = len(code)
-    for c in new_codes:
-        if len(c) >= l and c[:l] == code:
-            matched.append(c)
+    l = len(tag)
+    for t in new_tags:
+        if len(t) > l and t[:l] == tag:
+            matched.append(t)
     if matched != []:
         return ("prefix", matched)
             
     #order
-    code_list = list(code)
-    code_list.sort()
-    for c in new_codes:
-        c_list = list(c)
-        c_list.sort()
-        if code_list == c_list:
-            return ("order", c)
+    tag_list = list(tag)
+    tag_list.sort()
+    for t in new_tags:
+        t_list = list(t)
+        t_list.sort()
+        if tag_list == t_list:
+            return ("order", t)
 
     #different                                
     return ("different", None)
 
 
-for line in sys.stdin:
+#for line in sys.stdin:
+for line in fileinput.input():
     columns = line.rstrip('\r\n').split("\t")
     if len(columns) < 4:
         continue
-    code = columns[2]
-    new_codes = columns[3].split(":")[2::2]
-    if code not in new_codes:
+    tag = columns[2]
+    if len(columns[3]) == 1:
+        new_tags = columns[3]
+    else:
+        new_tags = columns[3].split(":")[2::2]
+    if tag not in new_tags:
         #print(line, end = "")
-        (mistake, result) = mistake_type(code, new_codes, line, columns)
-        if mistake == "no match":
+        (mistake, result) = mistake_type(tag, new_tags, line, columns)
+        if mistake == "no tag":
+            print("no tag\t", line, end = "", sep = "")
+        elif mistake == "no match":
             print("no match\t", line, end = "", sep = "")
         elif mistake == "prefix":
-            print("prefix", "\t", columns[0], "\t", columns[1], "\t", code, "\t", columns[0], ":",columns[1], ":", ":".join(result), sep = "")
+            print("prefix", "\t", columns[0], "\t", columns[1], "\t", tag, "\t", columns[0], ":",columns[1], ":", ":".join(result), sep = "")
         elif mistake == "order":
-            print("order", "\t", columns[0], "\t", columns[1], "\t", code, "\t", columns[0], ":",columns[1], ":", result, sep = "")
+            print("order", "\t", columns[0], "\t", columns[1], "\t", tag, "\t", columns[0], ":",columns[1], ":", result, sep = "")
         else:
             print("different\t", line, end = "", sep = "")
         
