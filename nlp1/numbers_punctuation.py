@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 import sys
 
-
+#kdyz je v radku jen jedno slovo
 
 for line in sys.stdin:
     if line[0] == "<":
         sys.stdout.write(line)
         continue
     columns = line.rstrip('\r\n').split("\t")
-    if len(columns) < 3 :
+    if len(columns) < 3 and columns[0][0].isalpha():
+        continue
+    if len(columns) < 3:
         columns.append("")
         if columns[0][0].isdigit():
             nlist = list(columns[0])
@@ -21,7 +23,7 @@ for line in sys.stdin:
             tag = "k4"
             columns.append(":".join([columns[0], base, tag]))
 
-        else:       #XXX ocekavam, ze ve sloupci je jen 1 znak 
+        else:       #XXX ocekavam, ze v columns[0] je jen 1 znak 
             base = columns[0]
             tag = "kIx"
             if base == "." or base == "!" or base == "?":
