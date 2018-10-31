@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 
 import sys
+#import fileinput
 
 
 def mistake_type(tag, new_tags, line, columns):
     matched = []
 
     #no tag
-    if tag =="":
+    if tag == "":
         return("no tag", None)
     
     #no match
@@ -35,6 +36,7 @@ def mistake_type(tag, new_tags, line, columns):
     return ("different", None)
 
 
+#for line in fileinput.input():
 for line in sys.stdin:
     columns = line.rstrip('\r\n').split("\t")
     if len(columns) < 4:

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import sys
 
-#kdyz je v radku jen jedno slovo
 
 for line in sys.stdin:
     if line[0] == "<":
