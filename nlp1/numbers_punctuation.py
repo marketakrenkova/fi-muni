@@ -12,11 +12,13 @@ for line in sys.stdin:
     if len(columns) < 3:
         columns.append("")
         if columns[0][0].isdigit():
+            if columns[0][len(columns[0])-1].isalpha():
+                continue
             nlist = list(columns[0])
             base = ""         #base - zakladni tvar
             for n in nlist:
                 if n.isdigit():
-                    base += "#"    
+                    base += "#"
                 else:
                     base += n
             tag = "k4"
